@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html>
+<head><title>Detalle del Club</title></head>
+<body>
+    <h2>Lista de Equipos</h2>
+    <ul>
+        {% for equipo in equipos %}
+        <li><a href="{% url 'detalle_equipo' equipo.pk %}">{{ equipo.nombre }}</a></li>
+        {% empty %}
+        <li>No hay equipos disponibles.</li>
+        {% endfor %}
+    </ul>
+    <a href="{% url 'inicio' %}">Inicio</a>
+</body>
+</html>

@@ -1,0 +1,11 @@
+<!DOCTYPE html>
+<html>
+<head><title>Detalle del Club</title></head>
+<body>
+    <h2>{{ equipo.nombre }}</h2>
+        <p><strong>Deporte:</strong> {{ equipo.deporte }}</p>
+        <p><strong>Ciudad:</strong> {{ equipo.ciudad }}</p>
+        <p><strong>Fundado en:</strong> {{ equipo.fundado_en }}</p>
+    <a href="{% url 'lista_equipos' %}">Volver a la lista</a>
+</body>
+</html>
