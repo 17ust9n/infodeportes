@@ -1,11 +1,18 @@
+{% load static %}
 <!DOCTYPE html>
-<html>
-<head><title>Detalle del Club</title></head>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Detalle del equipo</title>
+  <link rel="stylesheet" href="{% static 'appdeportes/estilos.css' %}">
+</head>
 <body>
-    <h2>{{ equipo.nombre }}</h2>
+  <h2 class="titulo">{{ equipo.nombre }}</h2>
+  <div class="botonera">
         <p><strong>Deporte:</strong> {{ equipo.deporte }}</p>
         <p><strong>Ciudad:</strong> {{ equipo.ciudad }}</p>
         <p><strong>Fundado en:</strong> {{ equipo.fundado_en }}</p>
-    <a href="{% url 'lista_equipos' %}">Volver a la lista</a>
+    <a href="{% url 'lista_equipos' %}"  class="boton">Volver a la lista</a>
+  </div>
 </body>
 </html>

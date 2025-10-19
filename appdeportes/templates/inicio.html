@@ -1,11 +1,29 @@
+{% load static %}
 <!DOCTYPE html>
-<html>
-<head><title>Inicio</title></head>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Inicio</title>
+  <link rel="stylesheet" href="{% static 'appdeportes/estilos.css' %}">
+</head>
 <body>
-    <h1>¡Bienvenido a esta página!</h1>
-    <nav>
-        <a href="{% url 'acerca' %}">¿Para qué sirve?</a> |
-        <a href="{% url 'lista_equipos' %}">Ver equipos</a>
-    </nav>
+
+<header>
+
+  <!-- ✅ Título centrado -->
+  <h1 class="titulo">¡Bienvenido a esta página!</h1>
+
+</header>
+
+<main>
+
+  <!-- ✅ Botones alineados horizontalmente debajo del título -->
+  <div class="botonera">
+    <a href="{% url 'acerca' %}" class="boton">¿Quienes somos?</a>
+    <a href="{% url 'lista_equipos' %}" class="boton">Ver equipos</a>
+  </div>
+
+</main>
+
 </body>
 </html>

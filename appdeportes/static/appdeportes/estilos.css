@@ -1,0 +1,57 @@
+/* Estilo general del cuerpo */
+/* Estilos base para el cuerpo */
+body {
+  display: flex;
+  flex-direction: column;
+  align-items: center; /* Centra horizontalmente los hijos */
+  padding: 40px 20px;
+  font-family: Arial, sans-serif;
+  background-color: #87CEEB !important;/* Opcional: para probar que el CSS se aplica */
+}
+
+header {
+  display: flex;
+  flex-direction: column;
+  justify-content: center; /* centra verticalmente */
+  align-items: center;     /* centra horizontalmente */
+  height: 90px;            /* o el alto que definas */
+  width: 320px;
+  padding: 0 20px;         /* si quieres sin padding arriba/abajo para centrar bien */
+  background-color: white !important;
+  border-radius: 8px;
+  box-shadow: 0 0 10px rgba(0,0,0,0.1);
+  margin-bottom: 30px;
+}
+
+.titulo {
+  margin: 0;             /* elimina margen arriba y abajo */
+  text-align: center;
+  font-size: 32px;
+  color: #333;
+}
+
+
+
+/* Contenedor de botones centrados */
+.botonera {
+  display: flex;
+  justify-content: center;
+  gap: 15px;
+  flex-wrap: wrap;
+}
+
+/* Estilo individual de cada botón */
+.boton {
+  display: inline-block;
+  padding: 10px 20px;
+  background-color: #007bff;
+  color: white;
+  text-decoration: none;
+  border-radius: 5px;
+  font-weight: bold;
+  transition: background-color 0.3s ease;
+}
+
+.boton:hover {
+  background-color: #0056b3;
+}

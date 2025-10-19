@@ -1,15 +1,35 @@
+{% load static %}
 <!DOCTYPE html>
-<html>
-<head><title>Detalle del Club</title></head>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Equipos</title>
+  <link rel="stylesheet" href="{% static 'appdeportes/estilos.css' %}">
+</head>
 <body>
-    <h2>Lista de Equipos</h2>
-    <ul>
-        {% for equipo in equipos %}
-        <li><a href="{% url 'detalle_equipo' equipo.pk %}">{{ equipo.nombre }}</a></li>
-        {% empty %}
-        <li>No hay equipos disponibles.</li>
-        {% endfor %}
-    </ul>
-    <a href="{% url 'inicio' %}">Inicio</a>
+  
+  <header>
+    <!-- Título arriba y centrado -->
+    <h2 class="titulo">Lista de Equipos</h2>
+  </header>
+  
+  <main>
+
+  <!-- Botones de equipos centrados debajo del título -->
+  <div class="botonera">
+    {% for equipo in equipos %}
+      <a href="{% url 'detalle_equipo' equipo.pk %}" class="boton">{{ equipo.nombre }}</a>
+    {% empty %}
+      <p>No hay equipos disponibles.</p>
+    {% endfor %}
+  </div>
+
+  <!-- Botón de inicio -->
+  <div class="botonera">
+    <a href="{% url 'inicio' %}" class="boton">Inicio</a>
+    <a href="{% url 'acerca' %}" class="boton">¿Quienes somos?</a>
+  </div>
+
+  </main>
 </body>
 </html>

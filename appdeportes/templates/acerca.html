@@ -1,10 +1,25 @@
+{% load static %}
 <!DOCTYPE html>
-<html>
-<head><title>Acerca de</title></head>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Quienes somos</title>
+  <link rel="stylesheet" href="{% static 'appdeportes/estilos.css' %}">
+</head>
 <body>
-    <h1>¿Para qué sirve esta página?</h1>
-    <p>Esta aplicación permite visualizar una lista de clubes y ver los detalles de cada uno.</p>
-    <a href="{% url 'inicio' %}">Volver al inicio</a>
-    <a href="{% url 'lista_equipos' %}">Lista de Equipos</a>
-</body>
+
+  <header>
+ <h1 class="titulo">¿Para qué sirve esta página?</h1>
+  </header>
+ 
+  <main>
+  <p class="descripcion">Esta aplicación permite visualizar una lista de clubes y ver los detalles de cada uno.</p>
+
+  <div class="botonera">
+    <a href="{% url 'inicio' %}"  class="boton">Volver al inicio</a>
+    <a href="{% url 'lista_equipos' %}"  class="boton">Lista de Equipos</a>
+  </div>
+
+  </main>
+  </body>
 </html>
