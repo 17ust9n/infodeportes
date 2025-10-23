@@ -9,6 +9,16 @@ body {
   background-color: #87CEEB !important;/* Opcional: para probar que el CSS se aplica */
 }
 
+main {
+  text-align: center;     /* centra el texto de los párrafos */
+  max-width: 700px;       /* más ancho que el header */
+  background-color: white;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  margin-bottom: 30px;
+}
+
 header {
   display: flex;
   flex-direction: column;
@@ -30,7 +40,15 @@ header {
   color: #333;
 }
 
+.lista-detalles {
+  text-align: left;     /* alinea el texto a la izquierda */
+  display: inline-block; /* permite que se vea centrado en la página pero con texto alineado a la izquierda */
+  margin-top: 15px;
+}
 
+.lista-detalles p {
+  margin: 5px 0;        /* espacio entre líneas */
+}
 
 /* Contenedor de botones centrados */
 .botonera {
@@ -54,4 +72,38 @@ header {
 
 .boton:hover {
   background-color: #0056b3;
+}
+
+/* Contenedor que agrupa todos los recuadros */
+.contenedor-equipos {
+  display: flex;
+  flex-wrap: wrap;         /* permite varias columnas */
+  justify-content: center; /* centra todo horizontalmente */
+  gap: 20px;               /* espacio entre recuadros */
+  margin-bottom: 30px;
+}
+
+/* Recuadro individual */
+.recuadro-equipo {
+  background-color: white;
+  border-radius: 10px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+  width: 200px;
+  padding: 15px;
+  text-align: center;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+/* Animación al pasar el mouse */
+.recuadro-equipo:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 4px 12px rgba(0,0,0,0.25);
+}
+
+/* Nombre del equipo */
+.nombre-equipo {
+  font-weight: bold;
+  font-size: 18px;
+  color: #333;
+  margin-bottom: 10px;
 }

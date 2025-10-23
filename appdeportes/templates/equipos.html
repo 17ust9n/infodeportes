@@ -16,18 +16,22 @@
   <main>
 
   <!-- Botones de equipos centrados debajo del título -->
-  <div class="botonera">
+  <div class="contenedor-equipos">
     {% for equipo in equipos %}
-      <a href="{% url 'detalle_equipo' equipo.pk %}" class="boton">{{ equipo.nombre }}</a>
+      <div class="recuadro-equipo">
+        <p class="nombre-equipo">{{ equipo.nombre }}</p>
+        <a href="{% url 'detalle_equipo' equipo.pk %}" class="boton">Ver equipo</a>
+      </div>
     {% empty %}
       <p>No hay equipos disponibles.</p>
     {% endfor %}
   </div>
+  
 
   <!-- Botón de inicio -->
   <div class="botonera">
-    <a href="{% url 'inicio' %}" class="boton">Inicio</a>
-    <a href="{% url 'acerca' %}" class="boton">¿Quienes somos?</a>
+    <a href="{% url 'inicio' %}" class="boton">Volver al inicio 🏠</a>
+    <a href="{% url 'acerca' %}" class="boton">¿Quienes somos? ❓</a>
   </div>
 
   </main>
