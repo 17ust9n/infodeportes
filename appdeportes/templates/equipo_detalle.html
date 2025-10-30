@@ -7,12 +7,37 @@
   <link rel="stylesheet" href="{% static 'appdeportes/estilos.css' %}">
 </head>
 <body>
+
+  <header>
   <h2 class="titulo">{{ equipo.nombre }}</h2>
-  <div class="botonera">
-        <p><strong>Deporte:</strong> {{ equipo.deporte }}</p>
+  </header>
+
+
+  <main>
+    <div>
+        {% if equipo.escudo %}
+            <img src="{{ equipo.escudo.url }}" alt="Escudo de {{ equipo.nombre }}" width="200">
+        {% else %}
+            <p><em>No hay escudo disponible.</em></p>
+        {% endif %}
+        
         <p><strong>Ciudad:</strong> {{ equipo.ciudad }}</p>
-        <p><strong>Fundado en:</strong> {{ equipo.fundado_en }}</p>
-    <a href="{% url 'lista_equipos' %}"  class="boton">Volver a la lista</a>
-  </div>
+        <p><strong>Año de fundación:</strong> {{ equipo.anio_fundacion }}</p>
+        <p><strong>Cantidad de hinchas:</strong> {{ equipo.cantidad_hinchas }}</p>
+        <p><strong>Cantidad de copas:</strong> {{ equipo.cantidad_copas }}</p>
+        <p><strong>Clásico rival:</strong> {{ equipo.clasico_rival }}</p>
+        <p><strong>Apodo:</strong> {{ equipo.apodo }}</p>
+
+        {% if equipo.estadio %}
+        <div class="foto-estadio">
+          <h3>Estadio</h3>
+          <img src="{{ equipo.estadio.url }}" 
+               alt="Estadio de {{ equipo.nombre }}">
+        </div>
+      {% endif %}
+
+        <a href="{% url 'lista_equipos' %}" class="boton">Volver a la lista</a>
+    </div>
+  </main>
 </body>
 </html>

@@ -3,6 +3,13 @@ from django.db import models
 class Equipo(models.Model):
     nombre = models.CharField(max_length=100)
 
+    ciudad = models.CharField(
+        max_length=100,
+        help_text="Ciudad principal del club",
+        blank=True,
+        null=True
+    )
+
     cantidad_hinchas = models.CharField(
         max_length=100,
         help_text="Cantidad de hinchas aproximadamente (puede no ser exacta)",
@@ -37,6 +44,13 @@ class Equipo(models.Model):
         blank=True,
         null=True,
         help_text="Foto del escudo del club"
+    )
+
+    estadio = models.ImageField(
+        upload_to='estadios/',
+        blank=True,
+        null=True,
+        help_text="Foto del estadio del club"
     )
 
     def __str__(self):

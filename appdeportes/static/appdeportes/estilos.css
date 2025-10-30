@@ -77,33 +77,58 @@ header {
 /* Contenedor que agrupa todos los recuadros */
 .contenedor-equipos {
   display: flex;
-  flex-wrap: wrap;         /* permite varias columnas */
-  justify-content: center; /* centra todo horizontalmente */
-  gap: 20px;               /* espacio entre recuadros */
-  margin-bottom: 30px;
+  flex-wrap: wrap;
+  gap: 15px;
+  justify-content: center;
 }
 
-/* Recuadro individual */
+/* Tarjeta de cada equipo */
 .recuadro-equipo {
   background-color: white;
   border-radius: 10px;
   box-shadow: 0 2px 8px rgba(0,0,0,0.15);
   width: 200px;
   padding: 15px;
-  text-align: center;
   transition: transform 0.2s ease, box-shadow 0.2s ease;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px; /* espacio entre escudo y nombre */
 }
 
-/* Animación al pasar el mouse */
 .recuadro-equipo:hover {
   transform: translateY(-5px);
   box-shadow: 0 4px 12px rgba(0,0,0,0.25);
 }
 
-/* Nombre del equipo */
+/* Nombre del equipo como link */
 .nombre-equipo {
   font-weight: bold;
-  font-size: 18px;
+  font-size: 16px;
   color: #333;
-  margin-bottom: 10px;
+  text-decoration: none;
+}
+
+.nombre-equipo:hover {
+  color: #0055aa;
+}
+
+/* Escudo pequeño, alineado con la letra */
+.escudo-mini {
+  width: 2em;                /* tamaño uniforme */
+  height: 2em;               /* igual ancho y alto */
+  aspect-ratio: 1 / 1;       /* fuerza el formato cuadrado */
+  object-fit: contain;       /* encaja la imagen sin deformarla */
+  background-color: #f8f8f8; /* fondo por si sobra espacio */
+  border-radius: 4px;        /* esquinas suaves */
+  vertical-align: middle;    /* alineado con el texto */
+}
+
+.foto-estadio img {
+  width: 100%;       /* se ajusta al contenedor */
+  max-width: 400px;  /* tamaño máximo */
+  height: auto;      /* mantiene proporción */
+  border-radius: 8px;
+  margin-top: 10px;
 }
