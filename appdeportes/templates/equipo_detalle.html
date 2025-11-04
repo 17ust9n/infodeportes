@@ -36,6 +36,15 @@
         </div>
       {% endif %}
 
+      {% if equipo.mapa %}
+        <h3>Ubicación del estadio</h3>
+        <div class="map-container">
+            {{ equipo.mapa|safe }}
+        </div>
+    {% else %}
+        <p>No hay mapa disponible.</p>
+    {% endif %}
+
         <a href="{% url 'lista_equipos' %}" class="boton">Volver a la lista</a>
     </div>
   </main>

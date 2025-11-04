@@ -53,5 +53,11 @@ class Equipo(models.Model):
         help_text="Foto del estadio del club"
     )
 
+    mapa = models.TextField(
+        blank=True,
+        null=True,
+        help_text="Código embed del mapa de Google Maps (iframe)"
+    )
+
     def __str__(self):
         return self.nombre
