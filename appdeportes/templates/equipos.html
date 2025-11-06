@@ -1,51 +1,34 @@
+{% extends 'base.html' %}
 {% load static %}
-<!DOCTYPE html>
-<html lang="es">
-<head>
-  <meta charset="UTF-8">
-  <title>Equipos</title>
-  <link rel="stylesheet" href="{% static 'appdeportes/estilos.css' %}">
-</head>
-<body>
-  
-  <header>
-    <!-- Título arriba y centrado -->
-    <h2 class="titulo">Lista de Equipos ⚽</h2>
-  </header>
-  
-  <main>
 
-  <!-- Botones de equipos centrados debajo del título -->
+{% block title %}Equipos{% endblock %}
+
+{% block content %}
+<header>
+  <h2 class="titulo">Lista de Equipos ⚽</h2>
+</header>
+
+<main>
+  <!-- Equipos en tarjetas -->
   <div class="contenedor-equipos">
-  {% for equipo in equipos %}
-    <div class="recuadro-equipo">
-      {% if equipo.escudo %}
-        <img src="{{ equipo.escudo.url }}" alt="Escudo de {{ equipo.nombre }}" class="escudo-mini"
-        width="30" height="30">
-      {% else %}
-        <img src="{% static 'appdeportes/sin_escudo.png' %}" alt="Sin escudo" class="escudo-mini"
-        width="30" height="30">
-      {% endif %}
-      
-      <a href="{% url 'detalle_equipo' equipo.pk %}" class="nombre-equipo">
-        {{ equipo.nombre }}
-      </a>
-    </div>
-  {% empty %}
-    <p>No hay equipos disponibles.</p>
-  {% endfor %}
-</div>
-
-
-
-  
-
-  <!-- Botón de inicio -->
-  <div class="botonera">
-    <a href="{% url 'inicio' %}" class="boton">Volver al inicio 🏠</a>
-    <a href="{% url 'acerca' %}" class="boton">¿Quienes somos? ❓</a>
+    {% for equipo in equipos %}
+      <div class="recuadro-equipo">
+        {% if equipo.escudo %}
+          <img src="{{ equipo.escudo.url }}" alt="Escudo de {{ equipo.nombre }}" class="escudo-mini"
+          width="30" height="30">
+        {% else %}
+          <img src="{% static 'appdeportes/sin_escudo.png' %}" alt="Sin escudo" class="escudo-mini"
+          width="30" height="30">
+        {% endif %}
+        
+        <a href="{% url 'detalle_equipo' equipo.pk %}" class="nombre-equipo">
+          {{ equipo.nombre }}
+        </a>
+      </div>
+    {% empty %}
+      <p>No hay equipos disponibles.</p>
+    {% endfor %}
   </div>
 
-  </main>
-</body>
-</html>
+</main>
+{% endblock %}

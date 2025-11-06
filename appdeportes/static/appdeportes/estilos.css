@@ -1,17 +1,131 @@
-/* Estilo general del cuerpo */
-/* Estilos base para el cuerpo */
+/* ==================== ESTILOS DE LA NAVBAR ==================== */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
 body {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background-color: #87CEEB !important;
+  min-height: 100vh;
+}
+
+/* Navbar */
+.navbar {
+  background: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(10px);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  border-bottom: 3px solid #007bff;
+  margin-bottom: 20px;
+}
+
+.nav-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem 2rem;
+}
+
+.nav-brand {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  text-decoration: none;
+  color: #2d3748;
+  font-size: 1.5rem;
+  font-weight: bold;
+  transition: transform 0.3s ease;
+}
+
+.nav-brand:hover {
+  transform: scale(1.05);
+}
+
+.nav-icon {
+  font-size: 2rem;
+  animation: rotate 3s linear infinite;
+}
+
+@keyframes rotate {
+  0%, 100% { transform: rotate(0deg); }
+  50% { transform: rotate(15deg); }
+}
+
+.nav-title {
+  color: #007bff;
+}
+
+.nav-menu {
+  display: flex;
+  list-style: none;
+  gap: 0.5rem;
+}
+
+.nav-item {
+  position: relative;
+}
+
+.nav-link {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  color: #4a5568;
+  text-decoration: none;
+  padding: 0.75rem 1.5rem;
+  border-radius: 8px;
+  font-weight: 500;
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.nav-link::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: #007bff;
+  transition: left 0.3s ease;
+  z-index: -1;
+}
+
+.nav-link:hover::before {
+  left: 0;
+}
+
+.nav-link:hover {
+  color: white;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0, 123, 255, 0.4);
+}
+
+.link-icon {
+  font-size: 1.2rem;
+}
+
+/* ==================== TUS ESTILOS ORIGINALES (Actualizados) ==================== */
+
+/* Contenedor principal */
+.main-content {
   display: flex;
   flex-direction: column;
-  align-items: center; /* Centra horizontalmente los hijos */
-  padding: 40px 20px;
-  font-family: Arial, sans-serif;
-  background-color: #87CEEB !important;/* Opcional: para probar que el CSS se aplica */
+  align-items: center;
+  padding: 20px;
+  max-width: 1200px;
+  margin: 0 auto;
 }
 
 main {
-  text-align: center;     /* centra el texto de los párrafos */
-  max-width: 700px;       /* más ancho que el header */
+  text-align: center;
+  max-width: 700px;
   background-color: white;
   padding: 20px;
   border-radius: 8px;
@@ -22,11 +136,12 @@ main {
 header {
   display: flex;
   flex-direction: column;
-  justify-content: center; /* centra verticalmente */
-  align-items: center;     /* centra horizontalmente */
-  height: 90px;            /* o el alto que definas */
-  width: 320px;
-  padding: 0 20px;         /* si quieres sin padding arriba/abajo para centrar bien */
+  justify-content: center;
+  align-items: center;
+  min-height: 90px;
+  width: 100%;
+  max-width: 500px;
+  padding: 20px;
   background-color: white !important;
   border-radius: 8px;
   box-shadow: 0 0 10px rgba(0,0,0,0.1);
@@ -34,20 +149,20 @@ header {
 }
 
 .titulo {
-  margin: 0;             /* elimina margen arriba y abajo */
+  margin: 0;
   text-align: center;
   font-size: 32px;
   color: #333;
 }
 
 .lista-detalles {
-  text-align: left;     /* alinea el texto a la izquierda */
-  display: inline-block; /* permite que se vea centrado en la página pero con texto alineado a la izquierda */
+  text-align: left;
+  display: inline-block;
   margin-top: 15px;
 }
 
 .lista-detalles p {
-  margin: 5px 0;        /* espacio entre líneas */
+  margin: 5px 0;
 }
 
 /* Contenedor de botones centrados */
@@ -56,22 +171,29 @@ header {
   justify-content: center;
   gap: 15px;
   flex-wrap: wrap;
+  margin-top: 20px;
 }
 
 /* Estilo individual de cada botón */
 .boton {
   display: inline-block;
-  padding: 10px 20px;
+  padding: 12px 25px;
   background-color: #007bff;
   color: white;
   text-decoration: none;
-  border-radius: 5px;
+  border-radius: 8px;
   font-weight: bold;
-  transition: background-color 0.3s ease;
+  font-size: 1.1rem;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 10px rgba(0, 123, 255, 0.3);
+  cursor: pointer;
+  border: none;
 }
 
 .boton:hover {
   background-color: #0056b3;
+  transform: translateY(-3px);
+  box-shadow: 0 6px 15px rgba(0, 123, 255, 0.5);
 }
 
 /* Contenedor que agrupa todos los recuadros */
@@ -80,6 +202,7 @@ header {
   flex-wrap: wrap;
   gap: 15px;
   justify-content: center;
+  padding: 20px 0;
 }
 
 /* Tarjeta de cada equipo */
@@ -90,17 +213,73 @@ header {
   width: 200px;
   padding: 15px;
   transition: transform 0.2s ease, box-shadow 0.2s ease;
-
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 8px; /* espacio entre escudo y nombre */
+  gap: 8px;
 }
 
 .recuadro-equipo:hover {
   transform: translateY(-5px);
   box-shadow: 0 4px 12px rgba(0,0,0,0.25);
 }
+
+/* Recuadro para la descripción del inicio */
+.recuadro-info {
+  background-color: white;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  max-width: 700px;
+  margin: 0 auto 30px auto; /* Centrado y con margen inferior */
+  text-align: left;
+}
+
+
+.foto-personal {
+  width: 100px;       /* antes 150px */
+  height: 100px;      /* antes 150px */
+  border-radius: 50%;
+  object-fit: cover;
+  margin-bottom: 10px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
+  border: 3px solid #007bff;
+}
+
+.nombre-recuadro {
+  background-color: white;
+  padding: 4px 8px;
+  border-radius: 5px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+  border: 1px solid #ccc;
+  font-weight: bold;
+  display: inline-block;
+}
+
+.about-container {
+  background-color: white;
+  padding: 20px;
+  border-radius: 10px;
+  width: 80%;
+  margin: 0 auto; /* Centra todo el contenedor */
+  display: flex;
+  flex-direction: column;
+  align-items: center; /* Centra contenido interno */
+  text-align: center; /* Centra texto */
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.about-image {
+  width: 150px; /* Ajustá este valor si querés que sea más grande o chica */
+  height: auto;
+  border-radius: 50%; /* Hace la imagen redonda */
+  margin-bottom: 20px;
+}
+
+.about-text {
+  max-width: 600px;
+}
+
 
 /* Nombre del equipo como link */
 .nombre-equipo {
@@ -116,19 +295,130 @@ header {
 
 /* Escudo pequeño, alineado con la letra */
 .escudo-mini {
-  width: 2em;                /* tamaño uniforme */
-  height: 2em;               /* igual ancho y alto */
-  aspect-ratio: 1 / 1;       /* fuerza el formato cuadrado */
-  object-fit: contain;       /* encaja la imagen sin deformarla */
-  background-color: #f8f8f8; /* fondo por si sobra espacio */
-  border-radius: 4px;        /* esquinas suaves */
-  vertical-align: middle;    /* alineado con el texto */
+  width: 2em;
+  height: 2em;
+  aspect-ratio: 1 / 1;
+  object-fit: contain;
+  background-color: #f8f8f8;
+  border-radius: 4px;
+  vertical-align: middle;
+}
+
+.foto-estadio {
+  margin: 20px 0;
 }
 
 .foto-estadio img {
-  width: 100%;       /* se ajusta al contenedor */
-  max-width: 400px;  /* tamaño máximo */
-  height: auto;      /* mantiene proporción */
+  width: 100%;
+  max-width: 400px;
+  height: auto;
   border-radius: 8px;
   margin-top: 10px;
+}
+
+/* ==================== ESTILOS DEL MODAL PARA VER IMAGEN ==================== */
+
+/* Botón para ver imagen */
+.boton-ver-imagen {
+  margin-top: 15px;
+  background-color: #28a745;
+}
+
+.boton-ver-imagen:hover {
+  background-color: #218838;
+}
+
+/* Modal para imagen en grande */
+.modal-imagen {
+  display: none;
+  position: fixed;
+  z-index: 9999;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.9);
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+}
+
+.modal-contenido {
+  max-width: 90%;
+  max-height: 90%;
+  object-fit: contain;
+  animation: zoom 0.3s;
+  border-radius: 8px;
+}
+
+@keyframes zoom {
+  from {transform: scale(0.5)}
+  to {transform: scale(1)}
+}
+
+.cerrar-modal {
+  position: absolute;
+  top: 20px;
+  right: 40px;
+  color: #f1f1f1;
+  font-size: 50px;
+  font-weight: bold;
+  transition: 0.3s;
+}
+
+.cerrar-modal:hover,
+.cerrar-modal:focus {
+  color: #bbb;
+}
+
+/* Mejora para el contenedor del mapa */
+.map-container {
+  margin: 20px 0;
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+}
+
+.map-container iframe {
+  width: 100%;
+  height: 400px;
+  border: none;
+}
+
+/* ==================== RESPONSIVE ==================== */
+@media (max-width: 768px) {
+  .nav-container {
+    flex-direction: column;
+    gap: 1rem;
+    padding: 1rem;
+  }
+  
+  .nav-menu {
+    flex-direction: column;
+    width: 100%;
+    text-align: center;
+  }
+  
+  .nav-link {
+    justify-content: center;
+  }
+  
+  .titulo {
+    font-size: 24px;
+  }
+  
+  .botonera {
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  header {
+    width: 90%;
+  }
+
+  .cerrar-modal {
+    top: 10px;
+    right: 20px;
+    font-size: 40px;
+  }
 }

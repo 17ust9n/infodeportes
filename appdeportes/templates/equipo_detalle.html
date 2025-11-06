@@ -1,52 +1,85 @@
+{% extends 'base.html' %}
 {% load static %}
-<!DOCTYPE html>
-<html lang="es">
-<head>
-  <meta charset="UTF-8">
-  <title>Detalle del equipo</title>
-  <link rel="stylesheet" href="{% static 'appdeportes/estilos.css' %}">
-</head>
-<body>
 
-  <header>
+{% block title %}{{ equipo.nombre }}{% endblock %}
+
+{% block content %}
+<header>
   <h2 class="titulo">{{ equipo.nombre }}</h2>
-  </header>
+</header>
 
-
-  <main>
-    <div>
-        {% if equipo.escudo %}
-            <img src="{{ equipo.escudo.url }}" alt="Escudo de {{ equipo.nombre }}" width="200">
-        {% else %}
-            <p><em>No hay escudo disponible.</em></p>
-        {% endif %}
-        
-        <p><strong>Ciudad:</strong> {{ equipo.ciudad }}</p>
-        <p><strong>Año de fundación:</strong> {{ equipo.anio_fundacion }}</p>
-        <p><strong>Cantidad de hinchas:</strong> {{ equipo.cantidad_hinchas }}</p>
-        <p><strong>Cantidad de copas:</strong> {{ equipo.cantidad_copas }}</p>
-        <p><strong>Clásico rival:</strong> {{ equipo.clasico_rival }}</p>
-        <p><strong>Apodo:</strong> {{ equipo.apodo }}</p>
-
-        {% if equipo.estadio %}
-        <div class="foto-estadio">
-          <h3>Estadio</h3>
-          <img src="{{ equipo.estadio.url }}" 
-               alt="Estadio de {{ equipo.nombre }}">
-        </div>
-      {% endif %}
-
-      {% if equipo.mapa %}
-        <h3>Ubicación del estadio</h3>
-        <div class="map-container">
-            {{ equipo.mapa|safe }}
-        </div>
+<main>
+  <div>
+    {% if equipo.escudo %}
+      <img src="{{ equipo.escudo.url }}" alt="Escudo de {{ equipo.nombre }}" width="200">
     {% else %}
-        <p>No hay mapa disponible.</p>
+      <p><em>No hay escudo disponible.</em></p>
+    {% endif %}
+    
+    <p><strong>Ciudad:</strong> {{ equipo.ciudad }}</p>
+    <p><strong>Año de fundación:</strong> {{ equipo.anio_fundacion }}</p>
+    <p><strong>Cantidad de hinchas:</strong> {{ equipo.cantidad_hinchas }}</p>
+    <p><strong>Cantidad de copas:</strong> {{ equipo.cantidad_copas }}</p>
+    <p><strong>Clásico rival:</strong> {{ equipo.clasico_rival }}</p>
+    <p><strong>Apodo:</strong> {{ equipo.apodo }}</p>
+
+    {% if equipo.estadio %}
+      <div class="foto-estadio">
+        <h3>Estadio</h3>
+        <img src="{{ equipo.estadio.url }}" 
+             alt="Estadio de {{ equipo.nombre }}"
+             id="imagen-estadio">
+        
+        <!-- Botón para ver en grande -->
+        <button onclick="verImagenGrande()" class="boton boton-ver-imagen">🔍 Ver imagen en grande</button>
+      </div>
     {% endif %}
 
-        <a href="{% url 'lista_equipos' %}" class="boton">Volver a la lista</a>
+    {% if equipo.mapa %}
+      <h3>Ubicación del estadio</h3>
+      <div class="map-container">
+        {{ equipo.mapa|safe }}
+      </div>
+    {% else %}
+      <p>No hay mapa disponible.</p>
+    {% endif %}
+
+    <div class="botonera">
+      <a href="{% url 'lista_equipos' %}" class="boton">⬅️ Volver a la lista</a>
     </div>
-  </main>
-</body>
-</html>
+  </div>
+</main>
+
+<!-- Modal para ver la imagen en grande -->
+<div id="modal-imagen" class="modal-imagen" onclick="cerrarModal()">
+  <span class="cerrar-modal">&times;</span>
+  <img class="modal-contenido" id="img-modal">
+</div>
+
+<script>
+function verImagenGrande() {
+  var modal = document.getElementById("modal-imagen");
+  var imgModal = document.getElementById("img-modal");
+  var imgEstadio = document.getElementById("imagen-estadio");
+  
+  modal.style.display = "flex";
+  imgModal.src = imgEstadio.src;
+  
+  // Prevenir scroll del body cuando el modal está abierto
+  document.body.style.overflow = "hidden";
+}
+
+function cerrarModal() {
+  var modal = document.getElementById("modal-imagen");
+  modal.style.display = "none";
+  document.body.style.overflow = "auto";
+}
+
+// Cerrar con la tecla Escape
+document.addEventListener('keydown', function(event) {
+  if (event.key === "Escape") {
+    cerrarModal();
+  }
+});
+</script>
+{% endblock %}
