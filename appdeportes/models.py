@@ -3,31 +3,27 @@ from django.db import models
 class Equipo(models.Model):
     nombre = models.CharField(max_length=100)
 
-    ciudad = models.CharField(
-        max_length=100,
-        help_text="Ciudad principal del club",
-        blank=True,
-        null=True
-    )
-
     cantidad_hinchas = models.CharField(
         max_length=100,
         help_text="Cantidad de hinchas aproximadamente (puede no ser exacta)",
         blank=True,
         null=True
     )
+    
     cantidad_copas = models.CharField(
         max_length=100,
         help_text="Cantidad de copas, títulos, veces que ganó el torneo, etc",
         blank=True,
         null=True
     )
+
     clasico_rival = models.CharField(
-        max_length=100,
-        help_text="Clásico rival y cuántos partidos le lleva",
-        blank=True,
-        null=True
+    max_length=100,
+    help_text="Clásico rival y cuántos partidos le lleva",
+    blank=True,
+    null=True
     )
+
     apodo = models.CharField(
         max_length=100,
         help_text="Apodo del club, los hinchas y su estadio",
@@ -46,11 +42,25 @@ class Equipo(models.Model):
         help_text="Foto del escudo del club"
     )
 
+    nombre_estadio = models.CharField(
+        max_length=200,
+        blank=True,
+        null=True,
+        help_text="Nombre del estadio del club"
+    )
+
     estadio = models.ImageField(
         upload_to='estadios/',
         blank=True,
         null=True,
         help_text="Foto del estadio del club"
+    )
+
+    ubicacion_estadio = models.CharField(
+        max_length=200,
+        blank=True,
+        null=True,
+        help_text="Ubicación del estadio (dirección)"
     )
 
     mapa = models.TextField(

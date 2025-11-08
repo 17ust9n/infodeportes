@@ -16,7 +16,6 @@
       <p><em>No hay escudo disponible.</em></p>
     {% endif %}
     
-    <p><strong>Ciudad:</strong> {{ equipo.ciudad }}</p>
     <p><strong>Año de fundación:</strong> {{ equipo.anio_fundacion }}</p>
     <p><strong>Cantidad de hinchas:</strong> {{ equipo.cantidad_hinchas }}</p>
     <p><strong>Cantidad de copas:</strong> {{ equipo.cantidad_copas }}</p>
@@ -25,24 +24,29 @@
 
     {% if equipo.estadio %}
       <div class="foto-estadio">
-        <h3>Estadio</h3>
-        <img src="{{ equipo.estadio.url }}" 
-             alt="Estadio de {{ equipo.nombre }}"
-             id="imagen-estadio">
+        <h3>Estadio {% if equipo.nombre_estadio %} - {{ equipo.nombre_estadio }}{% endif %}</h3>
+        
+        <img src="{{ equipo.estadio.url }}" alt="Estadio de {{ equipo.nombre }}" id="imagen-estadio">
         
         <!-- Botón para ver en grande -->
         <button onclick="verImagenGrande()" class="boton boton-ver-imagen">🔍 Ver imagen en grande</button>
       </div>
     {% endif %}
 
-    {% if equipo.mapa %}
-      <h3>Ubicación del estadio</h3>
-      <div class="map-container">
-        {{ equipo.mapa|safe }}
-      </div>
+    {% if equipo.ubicacion_estadio %}
+  <h3>Ubicación del estadio</h3>
+  <p><strong>Dirección:</strong> {{ equipo.ubicacion_estadio }}</p>
+
+    <div class="map-container" style="margin-top: 1em;">
+      <iframe width="600" height="450" style="border:0" loading="lazy" allowfullscreen
+      referrerpolicy="no-referrer-when-downgrade"
+      src="https://www.google.com/maps?q={{ equipo.ubicacion_estadio|urlencode }}&output=embed">
+      </iframe>
+    </div>
     {% else %}
-      <p>No hay mapa disponible.</p>
+    <p>No hay ubicación cargada para este estadio.</p>
     {% endif %}
+
 
     <div class="botonera">
       <a href="{% url 'lista_equipos' %}" class="boton">⬅️ Volver a la lista</a>
