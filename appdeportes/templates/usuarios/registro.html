@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+
+{% block title %}Registro{% endblock %}
+
+{% block content %}
+<header>
+  <h1 class="titulo">Crear cuenta</h1>
+</header>
+
+<div class="recuadro-info">
+  <p class="descripcion">Completá tus datos para crear una nueva cuenta:</p>
+
+  <form method="post" class="formulario">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit" class="boton">Registrarse</button>
+  </form>
+
+  <p class="descripcion">
+    ¿Ya tenés cuenta?
+    <a href="{% url 'login' %}" class="link">Iniciá sesión</a>
+  </p>
+</div>
+{% endblock %}
