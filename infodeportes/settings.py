@@ -126,3 +126,6 @@ import os
 
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+
+LOGIN_URL = '/'  # a dónde redirigir si no está logueado
+SESSION_EXPIRE_AT_BROWSER_CLOSE = True  # cierra sesión al cerrar navegador

@@ -1,9 +1,9 @@
 from django.shortcuts import render, get_object_or_404, redirect
 from django.contrib.auth import login, logout
 from django.contrib.auth.forms import AuthenticationForm
+from django.contrib.auth.decorators import login_required
 from .models import Equipo
 from .forms import RegistroForm
-
 
 # --- VISTAS EXISTENTES ---
 def inicio(request):
@@ -12,16 +12,17 @@ def inicio(request):
 def acerca(request):
     return render(request, 'acerca.html')
 
+@login_required
 def lista_equipos(request):
     equipos = Equipo.objects.all()
     return render(request, 'equipos.html', {'equipos': equipos})
 
+@login_required
 def detalle_equipo(request, pk):
     equipo = get_object_or_404(Equipo, pk=pk)
     return render(request, 'equipo_detalle.html', {'equipo': equipo})
 
-
-# --- NUEVAS VISTAS DE USUARIO ---
+# --- VISTAS DE USUARIO ---
 def registro(request):
     if request.method == 'POST':
         form = RegistroForm(request.POST)
@@ -31,8 +32,7 @@ def registro(request):
             return redirect('inicio')
     else:
         form = RegistroForm()
-    return render(request, 'registro.html', {'form': form})
-
+    return render(request, 'usuarios/registro.html', {'form': form})
 
 def login_view(request):
     if request.method == 'POST':
@@ -43,9 +43,8 @@ def login_view(request):
             return redirect('inicio')
     else:
         form = AuthenticationForm()
-    return render(request, 'login.html', {'form': form})
-
+    return render(request, 'usuarios/login.html', {'form': form})
 
 def logout_view(request):
     logout(request)
-    return redirect('inicio')
+    return redirect('login_view')

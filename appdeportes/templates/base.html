@@ -9,6 +9,7 @@
 </head>
 <body>
 
+{% if user.is_authenticated %}
 <nav class="navbar">
   <div class="nav-container">
     <a href="{% url 'inicio' %}" class="nav-brand">
@@ -28,9 +29,16 @@
           <span>Ver equipos</span>
         </a>
       </li>
+      <li class="nav-item">
+        <a href="{% url 'logout' %}" class="nav-link">
+          <span class="link-icon">🔒</span>
+          <span>Cerrar sesión</span>
+        </a>
+      </li>
     </ul>
   </div>
 </nav>
+{% endif %}
 
 <div class="main-content">
   {% block content %}
