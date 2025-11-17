@@ -22,6 +22,11 @@ def detalle_equipo(request, pk):
     equipo = get_object_or_404(Equipo, pk=pk)
     return render(request, 'equipo_detalle.html', {'equipo': equipo})
 
+@login_required
+def amistoso(request, pk):
+    equipo = get_object_or_404(Equipo, pk=pk)
+    return render(request, 'amistoso.html', {'equipo': equipo})
+
 # --- VISTAS DE USUARIO ---
 def registro(request):
     if request.method == 'POST':

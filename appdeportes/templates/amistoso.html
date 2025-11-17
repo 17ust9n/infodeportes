@@ -1,0 +1,47 @@
+{% extends 'base.html' %}
+
+{% block title %}Amistoso entre Equipos{% endblock %}
+
+{% block content %}
+<header>
+  <h1 class="titulo">¡Realiza un amistoso entre tu equipo y la PC!</h1>
+</header>
+
+<div class="recuadro-info">
+  <p class="descripcion">Selecciona tu equipo y elige un número entre 1 y 5. La computadora elegirá un número aleatorio para su equipo. ¡El que saque el número más alto, gana!</p>
+
+  <form method="POST">
+    {% csrf_token %}
+    <div class="form-group">
+      <label for="equipo_1">Selecciona tu equipo:</label>
+      <select name="equipo_1" id="equipo_1">
+        {% for equipo in equipos %}
+        <option value="{{ equipo.id }}">{{ equipo.nombre }}</option>
+        {% endfor %}
+      </select>
+    </div>
+    
+    <div class="form-group">
+      <label for="num_equipo_1">Elige un número entre 1 y 5 para tu equipo:</label>
+      <input type="number" name="num_equipo_1" id="num_equipo_1" min="1" max="5" required>
+    </div>
+    
+    <button type="submit" class="btn-submit">¡Jugar!</button>
+  </form>
+  
+  {% if resultado %}
+  <div class="resultado">
+    <h2>Resultado del Partido:</h2>
+    <p><strong>{{ equipo_1_nombre }}</strong> eligió el número {{ num_equipo_1 }} y la PC eligió {{ pc_2 }}.</p>
+    
+    {% if resultado == "empate" %}
+    <p><strong>¡Empate!</strong></p>
+    {% elif resultado == "equipo_1" %}
+    <p><strong>{{ equipo_1_nombre }}</strong> ganó el partido.</p>
+    {% else %}
+    <p><strong>¡La PC ganó el partido!</strong></p>
+    {% endif %}
+  </div>
+  {% endif %}
+</div>
+{% endblock %}
