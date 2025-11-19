@@ -8,6 +8,7 @@ urlpatterns = [
     path('equipos/', views.lista_equipos, name='lista_equipos'),
     path('equipo/<int:pk>/', views.detalle_equipo, name='detalle_equipo'),
     path('amistoso/', views.amistoso, name='amistoso'),
+    path('guardar_partido/', views.guardar_partido, name='guardar_partido'),
     path('lista_partidos/', views.lista_partidos, name='lista_partidos'),  # <--- resuelto
 
     # --- nuevas rutas para usuarios ---

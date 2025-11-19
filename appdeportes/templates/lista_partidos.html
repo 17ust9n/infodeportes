@@ -5,6 +5,13 @@
 {% block content %}
 <header>
   <h2 class="titulo">Partidos Amistosos Guardados ⚽</h2>
+
+  <!-- Botón para ir a amistoso -->
+  <form method="get" action="{% url 'amistoso' %}" style="margin-top:10px;">
+      <button type="submit" class="boton" style="background:#28a745; color:white; padding:8px 12px; border:none; border-radius:5px;">
+          Jugar Nuevo Partido
+      </button>
+  </form>
 </header>
 
 <main style="padding: 20px; max-width: 800px; margin: auto;">
