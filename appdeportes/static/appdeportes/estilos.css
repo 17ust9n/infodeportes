@@ -422,3 +422,37 @@ header {
     font-size: 40px;
   }
 }
+
+/* Recuadro del resultado del partido */
+.recuadro-resultado {
+    background-color: white;
+    border-radius: 10px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+    width: 100%;               /* Ocupa todo el ancho disponible */
+    max-width: 900px;          /* Ajustable según pantalla */
+    padding: 15px;
+    display: flex;
+    flex-direction: column;    /* Para que resultado y botón estén apilados */
+    align-items: center;
+    text-align: center;
+    white-space: nowrap;       /* ❗ Evita que el marcador haga salto de línea */
+    overflow: hidden;
+    margin: 10px 0;
+}
+
+/* Marcador en una sola línea */
+.recuadro-resultado p.marcador {
+    font-size: 16px;           /* Ajustable */
+    margin: 0;
+}
+
+/* Texto del resultado (GANASTE! / EMPATE / GANA PC) */
+.recuadro-resultado p.resultado {
+    margin-top: 10px;
+    font-size: 16px;           /* Ajustable */
+}
+
+/* Botón de reiniciar */
+.recuadro-resultado form {
+    margin-top: 10px;
+}

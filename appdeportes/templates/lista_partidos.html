@@ -1,0 +1,44 @@
+{% extends 'base.html' %}
+
+{% block title %}Lista de Partidos{% endblock %}
+
+{% block content %}
+<header>
+  <h2 class="titulo">Partidos Amistosos Guardados ⚽</h2>
+</header>
+
+<main style="padding: 20px; max-width: 800px; margin: auto;">
+    <!-- HISTORIAL -->
+    {% if historial %}
+    <hr>
+    <h2>Historial de Partidos</h2>
+
+    <table border="1" cellpadding="5" style="border-collapse: collapse; width: 100%; text-align: center;">
+        <thead style="background: #f0f0f0;">
+            <tr>
+                <th>#</th>
+                <th>Tu Equipo</th>
+                <th>Goles</th>
+                <th>Equipo PC</th>
+                <th>Goles</th>
+                <th>Resultado</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for partido in historial %}
+            <tr>
+                <td>{{ forloop.counter }}</td>
+                <td>{{ partido.equipo_vos.nombre }}</td>
+                <td>{{ partido.goles_vos }}</td>
+                <td>{{ partido.equipo_pc.nombre }}</td>
+                <td>{{ partido.goles_pc }}</td>
+                <td>{{ partido.resultado }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    {% else %}
+        <p>No hay partidas guardadas.</p>
+    {% endif %}
+</main>
+{% endblock %}

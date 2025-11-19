@@ -19,6 +19,7 @@ class Migration(migrations.Migration):
         migrations.AlterField(
             model_name='equipo',
             name='clasico_rival',
-            field=models.ForeignKey(blank=True, help_text='Clásico rival del equipo', null=True, on_delete=django.db.models.deletion.SET_NULL, related_name='rivales', to='appdeportes.equipo'),
+            field=models.CharField(max_length=100, blank=True, null=True, help_text='Clásico rival y cuántos partidos le lleva'
+        ),
         ),
     ]

@@ -1,47 +1,71 @@
 {% extends 'base.html' %}
+{% load static %}
 
-{% block title %}Amistoso entre Equipos{% endblock %}
+{% block title %}Partido Amistoso{% endblock %}
 
 {% block content %}
 <header>
-  <h1 class="titulo">¡Realiza un amistoso entre tu equipo y la PC!</h1>
+  <h2 class="titulo">Partido Amistoso ⚽</h2>
 </header>
 
-<div class="recuadro-info">
-  <p class="descripcion">Selecciona tu equipo y elige un número entre 1 y 5. La computadora elegirá un número aleatorio para su equipo. ¡El que saque el número más alto, gana!</p>
+<main style="max-width: 800px; margin: auto; padding: 20px;">
 
-  <form method="POST">
-    {% csrf_token %}
-    <div class="form-group">
-      <label for="equipo_1">Selecciona tu equipo:</label>
-      <select name="equipo_1" id="equipo_1">
-        {% for equipo in equipos %}
-        <option value="{{ equipo.id }}">{{ equipo.nombre }}</option>
-        {% endfor %}
-      </select>
-    </div>
-    
-    <div class="form-group">
-      <label for="num_equipo_1">Elige un número entre 1 y 5 para tu equipo:</label>
-      <input type="number" name="num_equipo_1" id="num_equipo_1" min="1" max="5" required>
-    </div>
-    
-    <button type="submit" class="btn-submit">¡Jugar!</button>
+  <!-- FORMULARIO PARA JUGAR -->
+  <form method="post" style="display: flex; flex-direction: column; gap: 15px;">
+      {% csrf_token %}
+
+      <div>
+          <label for="equipo_vos"><strong>Tu Equipo:</strong></label>
+          <select name="equipo_vos" id="equipo_vos" required style="padding: 5px; width: 100%;">
+              <option value="" disabled selected>Elige tu equipo</option>
+              {% for equipo in equipos %}
+                  <option value="{{ equipo.id }}"
+                      {% if equipo_vos and equipo.id == equipo_vos.id %}selected{% endif %}>
+                      {{ equipo.nombre }}
+                  </option>
+              {% endfor %}
+          </select>
+      </div>
+
+      <div>
+          <label for="goles_vos"><strong>Goles que marcaste:</strong></label>
+          <input type="number" name="goles_vos" id="goles_vos" min="0"
+                 value="{{ goles_vos|default:0 }}" required style="padding: 5px; width: 100%;">
+      </div>
+
+      <button type="submit" style="padding:10px; background:#28a745; color:white; border:none; border-radius:5px;">
+          Jugar
+      </button>
   </form>
-  
+
+  <!-- BOTONES ADICIONALES -->
+  <div style="margin-top: 20px; display: flex; gap: 10px;">
+      <form action="{% url 'lista_partidos' %}" method="get">
+          <button type="submit"
+                  style="padding:10px; background:#007bff; color:white; border:none; border-radius:5px;">
+              Lista de Partidos
+          </button>
+      </form>
+  </div>
+
   {% if resultado %}
-  <div class="resultado">
-    <h2>Resultado del Partido:</h2>
-    <p><strong>{{ equipo_1_nombre }}</strong> eligió el número {{ num_equipo_1 }} y la PC eligió {{ pc_2 }}.</p>
-    
-    {% if resultado == "empate" %}
-    <p><strong>¡Empate!</strong></p>
-    {% elif resultado == "equipo_1" %}
-    <p><strong>{{ equipo_1_nombre }}</strong> ganó el partido.</p>
-    {% else %}
-    <p><strong>¡La PC ganó el partido!</strong></p>
-    {% endif %}
+  <hr style="margin: 20px 0;">
+  <h2>Resultado del Partido:</h2>
+
+  <div class="recuadro-resultado">
+      <p class="marcador">
+          <strong>{{ equipo_vos.nombre }}</strong> {{ goles_vos }} (VOS)
+          &nbsp; - &nbsp;
+          {{ goles_pc }} (PC) <strong>{{ equipo_pc.nombre }}</strong>
+      </p>
+
+      <p class="resultado">{{ resultado }}</p>
+
+      <form method="get" action="{% url 'amistoso' %}">
+          <button type="submit" class="boton">Reiniciar</button>
+      </form>
   </div>
   {% endif %}
-</div>
+
+</main>
 {% endblock %}
