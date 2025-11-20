@@ -456,3 +456,35 @@ header {
 .recuadro-resultado form {
     margin-top: 10px;
 }
+
+.boton-personalizado {
+  display: inline-block;
+  width: 300px;          /* ancho fijo */
+  height: 45px;          /* altura fija */
+  padding: 0;            /* quitamos padding extra para altura exacta */
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-weight: bold;
+  font-size: 16px;       /* ajusta si hace falta */
+  cursor: pointer;
+  transition: all 0.3s ease;
+  margin-top: 12px;      /* espacio uniforme entre botones */
+  box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+  text-align: center;
+  line-height: 45px;     /* centra el texto verticalmente */
+}
+
+
+
+/* Colores específicos */
+.boton-naranja { background-color: #ff8c00; }
+.boton-rojo    { background-color: #dc3545; }
+.boton-verde   { background-color: #28a745; }
+.boton-azul    { background-color: #007bff; }
+
+/* Hover general */
+.boton-personalizado:hover {
+  opacity: 0.9;
+  transform: translateY(-2px);
+}

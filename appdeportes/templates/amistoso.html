@@ -5,10 +5,11 @@
 
 {% block content %}
 <header>
-  <h2 class="titulo">Partido Amistoso ⚽</h2>
+  <h2 class="titulo">Partido Amistoso 🤝</h2>
 </header>
 
 <main style="max-width: 800px; margin: auto; padding: 20px;">
+
 
   <!-- FORMULARIO PARA JUGAR -->
   <form method="post" style="display: flex; flex-direction: column; gap: 15px;">
@@ -33,12 +34,22 @@
                  value="{{ goles_vos|default:0 }}" required style="padding: 5px; width: 100%;">
       </div>
 
-      <button type="submit" style="padding:10px; background:#28a745; color:white; border:none; border-radius:5px;">
-          Jugar
-      </button>
-  </form>
+      <button type="submit" class="boton-personalizado boton-naranja" style="margin-left: 20px;">▶️Jugar!</button>
+    
+    
+    </form>
+    
+    <form method="get" action="{% url 'lista_partidos' %}">
+
+    <!-- Botón Ver Historial -->
+    <button type="submit" class="boton-personalizado boton-azul">
+    📋Ver Historial</button>
+
+    </form>
+
 
   {% if resultado %}
+  <!-- Lo demás queda igual -->
   <hr style="margin: 20px 0;">
   <h2>Resultado del Partido:</h2>
 
@@ -51,12 +62,15 @@
 
       <p class="resultado">{{ resultado }}</p>
 
-      <!-- Botón para reiniciar -->
-      <form method="get" action="{% url 'amistoso' %}">
-          <button type="submit" class="boton">Reiniciar</button>
-      </form>
+    <form method="get" action="{% url 'amistoso' %}">
 
-      <!-- Botón para guardar el partido -->
+  <!-- Botón Reiniciar -->
+  <button type="submit" class="boton-personalizado boton-rojo">
+    🔄Reiniciar</button>
+
+
+    </form>
+
       {% if not guardado %}
       <form method="post" action="{% url 'guardar_partido' %}">
           {% csrf_token %}
@@ -65,19 +79,18 @@
           <input type="hidden" name="goles_vos" value="{{ goles_vos }}">
           <input type="hidden" name="goles_pc" value="{{ goles_pc }}">
           <input type="hidden" name="resultado" value="{{ resultado }}">
-          <button type="submit" class="boton">Guardar Partida</button>
+
+        <!-- Botón Guardar Partida -->
+        <button type="submit" class="boton-personalizado boton-verde">
+        💾Guardar Partida</button>
+
       </form>
       {% else %}
           <p>✅ Partida guardada.</p>
       {% endif %}
 
-    <form method="get" action="{% url 'lista_partidos' %}" style="margin-top:10px;">
-        <button type="submit" class="boton" style="background:#007bff;">Ver Historial</button>
-    </form>
-
   </div>
-{% endif %}
-
+  {% endif %}
 
 </main>
 {% endblock %}

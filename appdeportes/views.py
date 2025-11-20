@@ -104,6 +104,12 @@ def lista_partidos(request):
     return render(request, 'lista_partidos.html', {'historial': historial})
 
 
+@login_required
+def eliminar_partido(request, partido_id):
+    partido = get_object_or_404(PartidoAmistoso, id=partido_id, usuario=request.user)
+    partido.delete()
+    return redirect('lista_partidos')
+
 # --- VISTAS DE USUARIO ---
 def registro(request):
     if request.method == 'POST':
