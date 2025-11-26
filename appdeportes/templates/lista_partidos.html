@@ -8,8 +8,9 @@
 
   <!-- Botón para ir a amistoso -->
   <form method="get" action="{% url 'amistoso' %}" style="margin-top:10px;">
-      <button type="submit" class="boton" style="background:#28a745; color:white; padding:8px 12px; border:none; border-radius:5px;">
-          Jugar Nuevo Partido 🤝</button>
+        <button type="submit" class="boton" style="background:#28a745;
+        color:white; padding:8px 12px; border:none; border-radius:5px;">
+        Jugar Nuevo Partido 🤝</button>
   </form>
 </header>
 
@@ -19,40 +20,40 @@
     <hr>
     <h2>Historial de Partidos</h2>
 
-    <table border="1" cellpadding="5" style="border-collapse: collapse; width: 100%; text-align: center;">
-        <thead style="background: #f0f0f0;">
-            <tr>
-                <th>#</th>
-                <th>Tu Equipo</th>
-                <th>Goles</th>
-                <th>Equipo PC</th>
-                <th>Goles</th>
-                <th>Resultado</th>
-                <th>Acciones</th>  <!-- Nueva columna para el botón de eliminar -->
-            </tr>
-        </thead>
-        <tbody>
-            {% for partido in historial %}
-            <tr>
-                <td>{{ forloop.counter }}</td>
-                <td>{{ partido.equipo_vos.nombre }}</td>
-                <td>{{ partido.goles_vos }}</td>
-                <td>{{ partido.equipo_pc.nombre }}</td>
-                <td>{{ partido.goles_pc }}</td>
-                <td>{{ partido.resultado }}</td>
-                <td>
-                    <!-- Botón de eliminar -->
-                    <form method="post" action="{% url 'eliminar_partido' partido.id %}" style="display:inline;">
-                        {% csrf_token %}
-                        <button type="submit" class="boton" style="background:#dc3545; color:white; padding:4px 8px; border:none; border-radius:5px;">
-                            Eliminar
-                        </button>
-                    </form>
-                </td>
-            </tr>
-            {% endfor %}
-        </tbody>
-    </table>
+    <table class="tabla-partidos">
+    <thead>
+        <tr>
+            <th>#</th>
+            <th>Tu Equipo</th>
+            <th>Goles</th>
+            <th>Equipo PC</th>
+            <th>Goles</th>
+            <th>Resultado</th>
+            <th>Acciones</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for partido in historial %}
+        <tr>
+            <td>{{ forloop.counter }}</td>
+            <td>{{ partido.equipo_vos.nombre }}</td>
+            <td>{{ partido.goles_vos }}</td>
+            <td>{{ partido.equipo_pc.nombre }}</td>
+            <td>{{ partido.goles_pc }}</td>
+            <td>{{ partido.resultado }}</td>
+
+            <td>
+                <form method="post" action="{% url 'eliminar_partido' partido.id %}">
+                    {% csrf_token %}
+                    <button type="submit" class="btn-eliminar">Eliminar</button>
+                </form>
+            </td>
+
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+
     {% else %}
         <p>No hay partidas guardadas.</p>
     {% endif %}

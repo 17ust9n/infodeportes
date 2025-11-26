@@ -8,49 +8,49 @@
   <h2 class="titulo">Partido Amistoso 🤝</h2>
 </header>
 
-<main style="max-width: 800px; margin: auto; padding: 20px;">
+<main class="main-partido">
 
+<!-- FORMULARIO PARA JUGAR -->
+<form method="post" class="form-partido">
+    {% csrf_token %}
 
-  <!-- FORMULARIO PARA JUGAR -->
-  <form method="post" style="display: flex; flex-direction: column; gap: 15px;">
-      {% csrf_token %}
+    <!-- Contenedor de Equipo + Goles en la misma fila -->
+    <div class="form-row">
+        <div class="form-group-inline">
+            <label for="equipo_vos">Tu Equipo:</label>
+            <select name="equipo_vos" id="equipo_vos" required>
+                <option value="" disabled selected>Elige tu equipo</option>
+                {% for equipo in equipos %}
+                    <option value="{{ equipo.id }}"
+                        {% if equipo_vos and equipo.id == equipo_vos.id %}selected{% endif %}>
+                        {{ equipo.nombre }}
+                    </option>
+                {% endfor %}
+            </select>
+        </div>
 
-      <div>
-          <label for="equipo_vos"><strong>Tu Equipo:</strong></label>
-          <select name="equipo_vos" id="equipo_vos" required style="padding: 5px; width: 100%;">
-              <option value="" disabled selected>Elige tu equipo</option>
-              {% for equipo in equipos %}
-                  <option value="{{ equipo.id }}"
-                      {% if equipo_vos and equipo.id == equipo_vos.id %}selected{% endif %}>
-                      {{ equipo.nombre }}
-                  </option>
-              {% endfor %}
-          </select>
-      </div>
+        <div class="form-group-inline">
+            <label for="goles_vos">Goles que marcaste:</label>
+            <input type="number" name="goles_vos" id="goles_vos" min="0" max="5"
+                   value="{{ goles_vos|default:0 }}" required>
+        </div>
+    </div>
 
-      <div>
-          <label for="goles_vos"><strong>Goles que marcaste:</strong></label>
-          <input type="number" name="goles_vos" id="goles_vos" min="0"
-                 value="{{ goles_vos|default:0 }}" required style="padding: 5px; width: 100%;">
-      </div>
+    <div class="botonera">
+        <!-- Botón Jugar: sigue dentro del formulario, requiere equipo -->
+        <button type="submit" class="boton-personalizado boton-naranja">Jugar ▶️</button>
+    </div>
+</form>
 
-      <button type="submit" class="boton-personalizado boton-naranja" style="margin-left: 20px;">▶️Jugar!</button>
-    
-    
-    </form>
-    
-    <form method="get" action="{% url 'lista_partidos' %}">
+<!-- Botón Ver Historial: formulario independiente -->
+<form method="get" action="{% url 'lista_partidos' %}" style="margin-top:10px;">
+    <button type="submit" class="boton-personalizado boton-azul">Ver Historial 📋</button>
+</form>
 
-    <!-- Botón Ver Historial -->
-    <button type="submit" class="boton-personalizado boton-azul">
-    📋Ver Historial</button>
-
-    </form>
 
 
   {% if resultado %}
-  <!-- Lo demás queda igual -->
-  <hr style="margin: 20px 0;">
+  <hr>
   <h2>Resultado del Partido:</h2>
 
   <div class="recuadro-resultado">
@@ -59,36 +59,28 @@
           &nbsp; - &nbsp;
           {{ goles_pc }} (PC) <strong>{{ equipo_pc.nombre }}</strong>
       </p>
-
       <p class="resultado">{{ resultado }}</p>
 
-    <form method="get" action="{% url 'amistoso' %}">
+      <div class="botonera">
+          <form method="get" action="{% url 'amistoso' %}">
+              <button type="submit" class="boton-personalizado boton-rojo">Reiniciar 🔄</button>
+          </form>
 
-  <!-- Botón Reiniciar -->
-  <button type="submit" class="boton-personalizado boton-rojo">
-    🔄Reiniciar</button>
-
-
-    </form>
-
-      <form method="post" action="{% url 'guardar_partido' %}">
-          {% csrf_token %}
-          <input type="hidden" name="equipo_vos_id" value="{{ equipo_vos.id }}">
-          <input type="hidden" name="equipo_pc_id" value="{{ equipo_pc.id }}">
-          <input type="hidden" name="goles_vos" value="{{ goles_vos }}">
-          <input type="hidden" name="goles_pc" value="{{ goles_pc }}">
-          <input type="hidden" name="resultado" value="{{ resultado }}">
-
-        <!-- Botón Guardar Partida -->
-        <button type="submit" class="boton-personalizado boton-verde">
-        💾Guardar Partida</button>
-
-      </form>
-      {% if guardado %}
-          <p>✅ Partida guardada.</p>
-      {% endif %}
-
+          <form method="post" action="{% url 'guardar_partido' %}">
+              {% csrf_token %}
+              <input type="hidden" name="equipo_vos_id" value="{{ equipo_vos.id }}">
+              <input type="hidden" name="equipo_pc_id" value="{{ equipo_pc.id }}">
+              <input type="hidden" name="goles_vos" value="{{ goles_vos }}">
+              <input type="hidden" name="goles_pc" value="{{ goles_pc }}">
+              <input type="hidden" name="resultado" value="{{ resultado }}">
+              <button type="submit" class="boton-personalizado boton-verde">Guardar Partida 💾</button>
+          </form>
       </div>
+
+      {% if guardado %}
+          <p class="mensaje-guardado">✅ Partida guardada.</p>
+      {% endif %}
+  </div>
   {% endif %}
 
 </main>

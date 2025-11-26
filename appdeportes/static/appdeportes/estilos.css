@@ -488,3 +488,44 @@ header {
   opacity: 0.9;
   transform: translateY(-2px);
 }
+
+.btn-eliminar {
+    background-color: #dc3545;   /* 🔴 Rojo */
+    color: white;
+    padding: 6px 12px;
+    border: none;
+    border-radius: 6px;
+    font-size: 14px;
+    cursor: pointer;
+    font-weight: bold;
+    transition: 0.3s ease;
+}
+
+.btn-eliminar:hover {
+    background-color: #b02a37;   /* 🔴 Rojo más oscuro */
+    transform: scale(1.05);
+}
+
+/* Contenedor para poner los campos en la misma fila */
+.form-row {
+    display: flex;
+    gap: 20px;             /* espacio entre campos */
+    flex-wrap: wrap;        /* responsive en pantallas pequeñas */
+}
+
+/* Cada grupo de label + campo en fila */
+.form-group-inline {
+    display: flex;
+    align-items: center;    /* etiqueta y campo centrados verticalmente */
+    gap: 8px;               /* espacio entre label y campo */
+}
+
+.form-group-inline select {
+    width: 160px; /* un poquito más ancho */
+    padding: 5px 8px;
+}
+
+.form-group-inline input[type="number"] {
+    width: 120px; /* ancho del campo de goles */
+    padding: 5px 8px;
+}
