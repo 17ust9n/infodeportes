@@ -71,7 +71,6 @@
 
     </form>
 
-      {% if not guardado %}
       <form method="post" action="{% url 'guardar_partido' %}">
           {% csrf_token %}
           <input type="hidden" name="equipo_vos_id" value="{{ equipo_vos.id }}">
@@ -85,11 +84,11 @@
         💾Guardar Partida</button>
 
       </form>
-      {% else %}
+      {% if guardado %}
           <p>✅ Partida guardada.</p>
       {% endif %}
 
-  </div>
+      </div>
   {% endif %}
 
 </main>
