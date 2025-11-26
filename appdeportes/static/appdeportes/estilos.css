@@ -5,10 +5,50 @@
   box-sizing: border-box;
 }
 
+/* ==================== FONDO MEJORADO ==================== */
 body {
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-  background-color: #87CEEB !important;
   min-height: 100vh;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+
+  /* Fondo con gradiente y textura ligera */
+  background: linear-gradient(to bottom right, #87CEEB, #f0f8ff);
+  background-attachment: fixed; /* efecto parallax */
+  position: relative;
+}
+
+/* Imagen inferior izquierda */
+body::before {
+    content: "";
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 380px;       /* ajustá tamaño */
+    height: 380px;
+    background-image: url("/static/img/exe_ceballos.jpg");
+    background-size: contain;
+    background-repeat: no-repeat;
+    opacity: 0.18;      /* transparencia */
+    pointer-events: none;
+    z-index: -1;
+}
+
+/* Imagen superior derecha (ahora bajada 50px) */
+body::after {
+    content: "";
+    position: fixed;
+    top: 100px;          /* antes estaba en 0 */
+    right: 0;
+    width: 380px;
+    height: 380px;
+    background-image: url("/static/img/Cerutti.jpg");
+    background-size: contain;
+    background-repeat: no-repeat;
+    opacity: 0.18;
+    pointer-events: none;
+    z-index: -1;
 }
 
 /* Navbar */

@@ -2,55 +2,68 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>{% block title %}Mi Sitio{% endblock %}</title>
-  <link rel="stylesheet" href="{% static 'appdeportes/estilos.css' %}">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}Mi Sitio{% endblock %}</title>
+
+    <!-- CSS principal -->
+    <link rel="stylesheet" href="{% static 'appdeportes/estilos.css' %}">
+
+    <!-- Bloque opcional para CSS o scripts en el <head> de cada template -->
+    {% block extra_head %}{% endblock %}
 </head>
 <body>
 
 {% if user.is_authenticated %}
 <nav class="navbar">
-  <div class="nav-container">
-    <a href="{% url 'inicio' %}" class="nav-brand">
-      <span class="nav-icon">⚽</span>
-      <span class="nav-title">InfoDeportes</span>
-    </a>
-    <ul class="nav-menu">
-      <li class="nav-item">
-        <a href="{% url 'acerca' %}" class="nav-link">
-          <span class="link-icon">❓</span>
-          <span>¿Quiénes somos?</span>
+    <div class="nav-container">
+        <a href="{% url 'inicio' %}" class="nav-brand">
+            <span class="nav-icon">⚽</span>
+            <span class="nav-title">InfoDeportes</span>
         </a>
-      </li>
-      <li class="nav-item">
-        <a href="{% url 'lista_equipos' %}" class="nav-link">
-          <span class="link-icon">🛡️</span>
-          <span>Ver equipos</span>
-        </a>
-      </li>
-      <li class="nav-item">
-        <a href="{% url 'amistoso' %}" class="nav-link">
-          <span class="link-icon">🤝</span>
-          <span>Amistoso</span>
-        </a>
-      </li>
 
-      <li class="nav-item">
-        <a href="{% url 'logout' %}" class="nav-link">
-          <span class="link-icon">🔒</span>
-          <span>Cerrar sesión</span>
-        </a>
-      </li>
-    </ul>
-  </div>
+        <ul class="nav-menu">
+            <li class="nav-item">
+                <a href="{% url 'acerca' %}" class="nav-link">
+                    <span class="link-icon">❓</span>
+                    <span>¿Quiénes somos?</span>
+                </a>
+            </li>
+
+            <li class="nav-item">
+                <a href="{% url 'lista_equipos' %}" class="nav-link">
+                    <span class="link-icon">🛡️</span>
+                    <span>Ver equipos</span>
+                </a>
+            </li>
+
+            <li class="nav-item">
+                <a href="{% url 'amistoso' %}" class="nav-link">
+                    <span class="link-icon">🤝</span>
+                    <span>Amistoso</span>
+                </a>
+            </li>
+
+            <li class="nav-item">
+                <a href="{% url 'logout' %}" class="nav-link">
+                    <span class="link-icon">🔒</span>
+                    <span>Cerrar sesión</span>
+                </a>
+            </li>
+        </ul>
+    </div>
 </nav>
 {% endif %}
 
+<!-- Contenido principal de cada página -->
 <div class="main-content">
-  {% block content %}
-  {% endblock %}
+    {% block content %}
+    {% endblock %}
 </div>
+
+<!-- Scripts personalizados que los templates hijos pueden agregar -->
+{% block scripts %}
+{% endblock %}
 
 </body>
 </html>

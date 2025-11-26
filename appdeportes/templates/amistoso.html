@@ -16,19 +16,28 @@
 
     <!-- Contenedor de Equipo + Goles en la misma fila -->
     <div class="form-row">
+        <!-- Selector de equipo -->
         <div class="form-group-inline">
-            <label for="equipo_vos">Tu Equipo:</label>
-            <select name="equipo_vos" id="equipo_vos" required>
-                <option value="" disabled selected>Elige tu equipo</option>
-                {% for equipo in equipos %}
-                    <option value="{{ equipo.id }}"
-                        {% if equipo_vos and equipo.id == equipo_vos.id %}selected{% endif %}>
-                        {{ equipo.nombre }}
-                    </option>
-                {% endfor %}
-            </select>
+            <!-- Custom select -->
+            <div class="custom-select" id="custom-select">
+                <div class="selected">
+                    <span>Elige tu equipo</span>
+                </div>
+                <div class="options">
+                    {% for equipo in equipos %}
+                    <div class="option" data-value="{{ equipo.id }}">
+                        <img src="{% if equipo.escudo %}{{ equipo.escudo.url }}{% else %}{% static 'appdeportes/sin_escudo.png' %}{% endif %}" 
+                             alt="Escudo de {{ equipo.nombre }}" class="escudo-mini">
+                        <span>{{ equipo.nombre }}</span>
+                    </div>
+                    {% endfor %}
+                </div>
+            </div>
+            <!-- Input oculto que envía el formulario -->
+            <input type="hidden" name="equipo_vos" id="equipo_vos" value="">
         </div>
 
+        <!-- Goles del usuario -->
         <div class="form-group-inline">
             <label for="goles_vos">Goles que marcaste:</label>
             <input type="number" name="goles_vos" id="goles_vos" min="0" max="5"
@@ -36,8 +45,8 @@
         </div>
     </div>
 
+    <!-- Botón para jugar -->
     <div class="botonera">
-        <!-- Botón Jugar: sigue dentro del formulario, requiere equipo -->
         <button type="submit" class="boton-personalizado boton-naranja">Jugar ▶️</button>
     </div>
 </form>
@@ -47,41 +56,123 @@
     <button type="submit" class="boton-personalizado boton-azul">Ver Historial 📋</button>
 </form>
 
+{% if resultado %}
+<hr>
+<h2>Resultado del Partido:</h2>
 
+<div class="recuadro-resultado">
+    <p class="marcador">
+        <strong>{{ equipo_vos.nombre }}</strong> {{ goles_vos }} (VOS)
+        &nbsp; - &nbsp;
+        {{ goles_pc }} (PC) <strong>{{ equipo_pc.nombre }}</strong>
+    </p>
+    <p class="resultado">{{ resultado }}</p>
 
-  {% if resultado %}
-  <hr>
-  <h2>Resultado del Partido:</h2>
+    <div class="botonera">
+        <form method="get" action="{% url 'amistoso' %}">
+            <button type="submit" class="boton-personalizado boton-rojo">Reiniciar 🔄</button>
+        </form>
 
-  <div class="recuadro-resultado">
-      <p class="marcador">
-          <strong>{{ equipo_vos.nombre }}</strong> {{ goles_vos }} (VOS)
-          &nbsp; - &nbsp;
-          {{ goles_pc }} (PC) <strong>{{ equipo_pc.nombre }}</strong>
-      </p>
-      <p class="resultado">{{ resultado }}</p>
+        <form method="post" action="{% url 'guardar_partido' %}">
+            {% csrf_token %}
+            <input type="hidden" name="equipo_vos_id" value="{{ equipo_vos.id }}">
+            <input type="hidden" name="equipo_pc_id" value="{{ equipo_pc.id }}">
+            <input type="hidden" name="goles_vos" value="{{ goles_vos }}">
+            <input type="hidden" name="goles_pc" value="{{ goles_pc }}">
+            <input type="hidden" name="resultado" value="{{ resultado }}">
+            <button type="submit" class="boton-personalizado boton-verde">Guardar Partida 💾</button>
+        </form>
+    </div>
 
-      <div class="botonera">
-          <form method="get" action="{% url 'amistoso' %}">
-              <button type="submit" class="boton-personalizado boton-rojo">Reiniciar 🔄</button>
-          </form>
-
-          <form method="post" action="{% url 'guardar_partido' %}">
-              {% csrf_token %}
-              <input type="hidden" name="equipo_vos_id" value="{{ equipo_vos.id }}">
-              <input type="hidden" name="equipo_pc_id" value="{{ equipo_pc.id }}">
-              <input type="hidden" name="goles_vos" value="{{ goles_vos }}">
-              <input type="hidden" name="goles_pc" value="{{ goles_pc }}">
-              <input type="hidden" name="resultado" value="{{ resultado }}">
-              <button type="submit" class="boton-personalizado boton-verde">Guardar Partida 💾</button>
-          </form>
-      </div>
-
-      {% if guardado %}
-          <p class="mensaje-guardado">✅ Partida guardada.</p>
-      {% endif %}
-  </div>
-  {% endif %}
+    {% if guardado %}
+        <p class="mensaje-guardado">✅ Partida guardada.</p>
+    {% endif %}
+</div>
+{% endif %}
 
 </main>
+
+<!-- CSS para custom select -->
+<style>
+.custom-select {
+  position: relative;
+  width: 250px;
+  cursor: pointer;
+}
+.custom-select .selected {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  padding: 5px 10px;
+  background-color: white;
+}
+.custom-select .options {
+  display: none;
+  position: absolute;
+  top: 100%;
+  left: 0;
+  right: 0;
+  max-height: 200px;
+  overflow-y: auto;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  background-color: white;
+  z-index: 100;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+}
+.custom-select .option {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 5px 10px;
+  transition: background 0.2s;
+}
+.custom-select .option:hover {
+  background-color: #f0f0f0;
+}
+.escudo-mini {
+  width: 25px;
+  height: 25px;
+  object-fit: contain;
+  border-radius: 4px;
+}
+</style>
+
+<!-- JS para custom select -->
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    const select = document.getElementById('custom-select');
+    const selected = select.querySelector('.selected');
+    const optionsContainer = select.querySelector('.options');
+    const hiddenInput = document.getElementById('equipo_vos');
+
+    // Abrir/cerrar opciones
+    selected.addEventListener('click', () => {
+        optionsContainer.style.display = optionsContainer.style.display === 'block' ? 'none' : 'block';
+    });
+
+    // Seleccionar opción
+    optionsContainer.querySelectorAll('.option').forEach(option => {
+        option.addEventListener('click', () => {
+            const escudo = option.querySelector('img').src;
+            const nombre = option.querySelector('span').innerText;
+            const valor = option.dataset.value;
+
+            selected.innerHTML = `<img src="${escudo}" class="escudo-mini"> <span>${nombre}</span>`;
+            hiddenInput.value = valor;
+            optionsContainer.style.display = 'none';
+        });
+    });
+
+    // Cerrar al hacer clic afuera
+    document.addEventListener('click', (e) => {
+        if (!select.contains(e.target)) {
+            optionsContainer.style.display = 'none';
+        }
+    });
+});
+</script>
+
 {% endblock %}
