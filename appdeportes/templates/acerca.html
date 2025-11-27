@@ -1,26 +1,99 @@
 {% extends 'base.html' %}
 
-{% block title %}Acerca de mí{% endblock %}
+{% block title %}Acerca de nosotros{% endblock %}
 
 {% block content %}
+
+<style>
+/* --- Estilos generales --- */
+
+.titulo {
+  text-align: center;
+  font-size: 2.2rem;
+  margin-bottom: 30px;
+  color: #333;
+}
+
+.authors {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 25px;
+  width: 100%;
+}
+
+/* Contenedor horizontal imagen + texto */
+.author {
+  display: flex;
+  align-items: center;
+  background: #ffffff;
+  border-radius: 12px;
+  padding: 20px;
+  width: 80%;
+  gap: 20px;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+}
+
+/* Imagenes redondas y pequeñas */
+.author-image {
+  width: 100px;
+  height: 100px;
+  object-fit: cover;
+  border-radius: 50%;  /* Redondas */
+}
+
+/* Texto */
+.author-info {
+  flex: 1;
+}
+
+.author-info h2 {
+  margin-bottom: 10px;
+  font-size: 1.5rem;
+}
+
+.author-info p {
+  color: #555;
+}
+
+/* Modo responsivo */
+@media (max-width: 768px) {
+  .author {
+    flex-direction: column;
+    text-align: center;
+  }
+}
+</style>
+
+
 <header>
-  <h1 class="titulo">Descripción de los autores</h1>
+    <h1 class="titulo">Descripción de los autores</h1>
 </header>
 
-  <div class="about-container">
-    <img src="/media/Agustin.jpg" alt="Foto de Agustin" class="about-image">
-    <div class="about-text">
-        <h2>Agustín Mastriani</h2>
-        <p> Gracias por visitar mi página personal. Soy un desarrollador web en constante aprendizaje y apasionado por la tecnología, la creatividad y el diseño. </p>
-    </div>
-</div>
-<div class="about-container">
-  <img src="/media/Pepo.jpg" alt="Foto de Pepo" class="about-image">
-  <div class="about-text">
-      <h2>Pedro Moretti</h2>
-        <p>Aprendiz en diseño de redes, pero con un gran futuro. Pasión por la creatividad y el diseño. </p>
-  </div>
-</div>
+<section class="authors">
 
+    <article class="author">
+        <img src="/media/Agustin.jpg" alt="Foto de Agustín Mastriani"
+             class="author-image">
+        <div class="author-info">
+            <h2>Agustín Mastriani</h2>
+            <p>
+                Gracias por visitar mi página personal. Soy un desarrollador web en constante aprendizaje y apasionado por la tecnología, la creatividad y el diseño.
+            </p>
+        </div>
+    </article>
+
+    <article class="author">
+        <img src="/media/Pepo.jpg" alt="Foto de Pedro Moretti"
+             class="author-image">
+        <div class="author-info">
+            <h2>Pedro Moretti</h2>
+            <p>
+                Aprendiz en diseño de redes, pero con un gran futuro. Pasión por la creatividad y el diseño.
+            </p>
+        </div>
+    </article>
+
+</section>
 
 {% endblock %}
