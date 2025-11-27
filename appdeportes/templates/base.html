@@ -11,6 +11,54 @@
 
     <!-- Bloque opcional para CSS o scripts en el <head> de cada template -->
     {% block extra_head %}{% endblock %}
+
+    <style>
+        /* Estilo específico para el usuario en el navbar */
+        .nav-item .user-info {
+            display: inline-flex;
+            align-items: center;
+            gap: 5px;
+            background-color: #90EE90; /* Verde claro */
+            border-radius: 5px;
+            padding: 8px 12px;
+            transition: background-color 0.3s ease;
+            cursor: default;
+        }
+
+        .nav-item .user-info:hover {
+            background-color: #228B22 !important; /* Verde oscuro */
+        }
+
+        .nav-item .user-info .link-icon,
+        .nav-item .user-info span {
+            transition: color 0.3s ease;
+            color: inherit;
+        }
+
+        .nav-item .user-info:hover .link-icon,
+        .nav-item .user-info:hover span {
+            color: white !important; /* Para mejor contraste con el verde oscuro */
+        }
+
+        /* Estilo específico para el botón de cerrar sesión - MUY ESPECÍFICO */
+        .navbar .nav-container .nav-menu .nav-item .nav-link.logout-link::before {
+            background: #DC143C !important; /* Rojo para el efecto de deslizamiento */
+        }
+
+        .navbar .nav-container .nav-menu .nav-item .nav-link.logout-link:hover {
+            background-color: #DC143C !important; /* Rojo */
+            box-shadow: 0 4px 12px rgba(220, 20, 60, 0.4) !important; /* Sombra roja */
+        }
+
+        /* Footer simple */
+        .site-footer {
+            text-align: center;
+            padding: 20px;
+            margin-top: 40px;
+            background-color: rgba(255, 255, 255, 0.9);
+            border-top: 1px solid #ddd;
+        }
+    </style>
 </head>
 <body>
 
@@ -45,7 +93,14 @@
             </li>
 
             <li class="nav-item">
-                <a href="{% url 'logout' %}" class="nav-link">
+                <span class="user-info">
+                    <span class="link-icon">👤</span>
+                    <span>{{ user.username }}</span>
+                </span>
+            </li>
+
+            <li class="nav-item">
+                <a href="{% url 'logout' %}" class="nav-link logout-link">
                     <span class="link-icon">🔒</span>
                     <span>Cerrar sesión</span>
                 </a>
@@ -60,6 +115,11 @@
     {% block content %}
     {% endblock %}
 </div>
+
+<!-- Footer con copyright -->
+<footer class="site-footer">
+    <p>&copy; {% now "Y" %} InfoDeportes. Todos los derechos reservados.</p>
+</footer>
 
 <!-- Scripts personalizados que los templates hijos pueden agregar -->
 {% block scripts %}
